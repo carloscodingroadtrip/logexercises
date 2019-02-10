@@ -18,14 +18,21 @@ export default class extends Component {
 		);
 	}
 
+	handleCategorySelected = (category) => {
+		this.setState({
+			category,
+		});
+	};
+
 	render () {
-		// console.log(this.getExercisesByCategory());
-		const exercises_by_cat = this.getExercisesByCategory();
+		const exercises_by_cat = this.getExercisesByCategory(),
+			{ category } = this.state;
+
 		return (
 			<Fragment>
 				<Header />
-				<Records exercises_in_group={exercises_by_cat} />
-				<Footer muscles={muscles} />
+				<Records exercises_in_group={exercises_by_cat} category={category} />
+				<Footer category={category} muscles={muscles} onSelect={this.handleCategorySelected} />
 			</Fragment>
 		);
 	}

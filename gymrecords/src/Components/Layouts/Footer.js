@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import AllIcon from '@material-ui/icons/FormatLineSpacing';
 import BullishIcon from '@material-ui/icons/Timeline';
@@ -12,22 +11,25 @@ const styles = {
 	},
 };
 
-const icons = [ <BullishIcon />, <BearishIcon />, <AllIcon /> ];
+const icons = [ <BullishIcon />, <BearishIcon />, <AllIcon />, <BullishIcon />, <BullishIcon /> ];
 
-export default ({ muscles }) => (
-	<Paper square className={styles.root}>
-		<Tabs
-			value={0}
-			// onChange={this.handleChange}
-			variant="fullWidth"
-			indicatorColor="secondary"
-			textColor="secondary">
-			{muscles.map((muscles_category, index) => <Tab label={muscles_category} icon={icons[index]} />)}
+export default ({ muscles, category, onSelect }) => {
+	//index below will default to index 5 (All) when loading since no category has been selected by user
+	const index = category ? muscles.findIndex((category_group) => category_group === category) + 1 : 0;
 
-			<Tab label="All" />
-			{/* <Tab icon={<BullishIcon />} label="BULLISH" />
-			<Tab icon={<BearishIcon />} label="BEARISH" />
-			<Tab icon={<AllIcon />} label="ALL" /> */}
-		</Tabs>
-	</Paper>
-);
+	const onIndexSelected = (e, index) => onSelect(index === 0 ? '' : muscles[index - 1]);
+
+	return (
+		<Paper square className={styles.root}>
+			<Tabs
+				value={index}
+				onChange={onIndexSelected}
+				variant="fullWidth"
+				indicatorColor="secondary"
+				textColor="secondary">
+				<Tab label="All" />
+				{muscles.map((muscles_category, index) => <Tab label={muscles_category} icon={icons[index]} />)}
+			</Tabs>
+		</Paper>
+	);
+};
