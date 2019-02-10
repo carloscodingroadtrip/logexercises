@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -18,20 +17,27 @@ const styles = {
 	},
 };
 
-export default ({ exercises_in_group, category }) => (
+export default ({
+	exercises_in_group,
+	category,
+	onSelect,
+	exercise: { id, title = 'Welcome!', description = 'Please select some ideas from the list on the left.' },
+}) => (
 	<Grid container spacing={24}>
 		<Grid item xs={6}>
 			<Paper style={styles.paper}>
 				{exercises_in_group.map(
 					([ group, exercises ]) =>
+						//if category is undefined or empty string or category equals the group we selected
+						//we display the fragment
 						!category || category === group ? (
 							<Fragment>
 								<Typography variant="headline" style={{ textTransform: 'capitalize' }}>
 									{group}
 								</Typography>
 								<List component="ul">
-									{exercises.map(({ title }) => (
-										<ListItem button>
+									{exercises.map(({ id, title }) => (
+										<ListItem button onClick={() => onSelect(id)}>
 											<ListItemText primary={title} />
 										</ListItem>
 									))}
@@ -43,9 +49,9 @@ export default ({ exercises_in_group, category }) => (
 		</Grid>
 		<Grid item xs={6}>
 			<Paper style={styles.paper}>
-				<Typography variant="display1">Welcome</Typography>
+				<Typography variant="display1">{title}</Typography>
 				<Typography variant="body1" style={{ marginTop: 20 }}>
-					Please select some ideas from the list on the left.
+					{description}
 				</Typography>
 			</Paper>
 		</Grid>

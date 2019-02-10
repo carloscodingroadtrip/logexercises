@@ -16,7 +16,7 @@ const icons = [ <BullishIcon />, <BearishIcon />, <AllIcon />, <BullishIcon />, 
 export default ({ muscles, category, onSelect }) => {
 	//index below will default to index 5 (All) when loading since no category has been selected by user
 	const index = category ? muscles.findIndex((category_group) => category_group === category) + 1 : 0;
-
+	//when a category (Tab) is selected we display the exercises belonging to that category.
 	const onIndexSelected = (e, index) => onSelect(index === 0 ? '' : muscles[index - 1]);
 
 	return (
