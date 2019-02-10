@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import LeftPane from './leftPane';
-const styles = (theme) => ({
+import RightPane from './rightPane';
+const styles = {
 	root: {
 		flexGrow: 1,
 	},
 	paper: {
-		padding: theme.spacing.unit * 2,
+		padding: 20,
+		margin: 10,
+		marginbottom: 10,
 		textAlign: 'center',
-		color: theme.palette.text.secondary,
+		// color: palsette.text.secondary,
 	},
-});
+};
 
-class Records extends Component {
-	render () {
-		const { classes } = this.props;
-		return (
-			<div className={classes.root}>
-				<Grid container spacing={24}>
-					<Grid item xs={6}>
-						<LeftPane className={classes.paper} />
-					</Grid>
-					<Grid item xs={6}>
-						<Paper className={classes.paper}>Right Pane</Paper>
-					</Grid>
-				</Grid>
-			</div>
-		);
-	}
-}
-
-export default withStyles(styles)(Records);
+export default (props) => (
+	<Grid container spacing={24}>
+		<Grid item xs={6}>
+			<LeftPane styles={styles} />
+		</Grid>
+		<Grid item xs={6}>
+			<RightPane styles={styles} />
+		</Grid>
+	</Grid>
+);
