@@ -12,33 +12,22 @@ const styles = {
 	},
 };
 
-class Footer extends Component {
-	state = {
-		value: 0,
-	};
+const icons = [ <BullishIcon />, <BearishIcon />, <AllIcon /> ];
 
-	handleChange = (event, value) => {
-		this.setState({ value });
-	};
+export default ({ muscles }) => (
+	<Paper square className={styles.root}>
+		<Tabs
+			value={0}
+			// onChange={this.handleChange}
+			variant="fullWidth"
+			indicatorColor="secondary"
+			textColor="secondary">
+			{muscles.map((muscles_category, index) => <Tab label={muscles_category} icon={icons[index]} />)}
 
-	render () {
-		const { classes } = this.props;
-
-		return (
-			<Paper square className={classes.root}>
-				<Tabs
-					value={this.state.value}
-					onChange={this.handleChange}
-					variant="fullWidth"
-					indicatorColor="secondary"
-					textColor="secondary">
-					<Tab icon={<BullishIcon />} label="BULLISH" />
-					<Tab icon={<BearishIcon />} label="BEARISH" />
-					<Tab icon={<AllIcon />} label="ALL" />
-				</Tabs>
-			</Paper>
-		);
-	}
-}
-
-export default withStyles(styles)(Footer);
+			<Tab label="All" />
+			{/* <Tab icon={<BullishIcon />} label="BULLISH" />
+			<Tab icon={<BearishIcon />} label="BEARISH" />
+			<Tab icon={<AllIcon />} label="ALL" /> */}
+		</Tabs>
+	</Paper>
+);
