@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
-
+import LeftPane from './leftPane';
 const styles = (theme) => ({
 	root: {
 		flexGrow: 1,
@@ -20,7 +20,7 @@ class Records extends Component {
 			<div className={classes.root}>
 				<Grid container spacing={24}>
 					<Grid item xs={6}>
-						<Paper className={classes.paper}>Left Pane</Paper>
+						<LeftPane className={classes.paper} />
 					</Grid>
 					<Grid item xs={6}>
 						<Paper className={classes.paper}>Right Pane</Paper>
