@@ -31,13 +31,13 @@ export default ({
 						//if category is undefined or empty string or category equals the group we selected
 						//we display the fragment
 						!category || category === group ? (
-							<Fragment>
+							<Fragment key={group}>
 								<Typography variant="headline" style={{ textTransform: 'capitalize' }}>
 									{group}
 								</Typography>
 								<List component="ul">
 									{exercises.map(({ id, title }) => (
-										<ListItem button onClick={() => onSelect(id)}>
+										<ListItem key={id} button onClick={() => onSelect(id)}>
 											<ListItemText primary={title} />
 										</ListItem>
 									))}

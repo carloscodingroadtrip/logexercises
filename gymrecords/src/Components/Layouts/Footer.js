@@ -28,7 +28,9 @@ export default ({ muscles, category, onSelect }) => {
 				indicatorColor="secondary"
 				textColor="secondary">
 				<Tab label="All" />
-				{muscles.map((muscles_category, index) => <Tab label={muscles_category} icon={icons[index]} />)}
+				{muscles.map((muscles_category, index) => (
+					<Tab key={muscles_category} label={muscles_category} icon={icons[index]} />
+				))}
 			</Tabs>
 		</Paper>
 	);
