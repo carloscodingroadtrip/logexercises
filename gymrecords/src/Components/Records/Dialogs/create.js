@@ -36,7 +36,7 @@ export default withStyles(styles)(
 	class CreateDialog extends Component {
 		state = {
 			open: false,
-			form: {
+			exercise: {
 				title: '',
 				description: '',
 				muscles: '',
@@ -50,8 +50,8 @@ export default withStyles(styles)(
 		};
 		handleChange = (name) => ({ target: { value } }) => {
 			this.setState({
-				form: {
-					...this.state.form,
+				exercise: {
+					...this.state.exercise,
 					[name]: value,
 				},
 			});
@@ -60,10 +60,22 @@ export default withStyles(styles)(
 		handleSubmit = () => {
 			//todo: validation
 			const { exercise } = this.state;
-			this.props.onCreate(exercise);
+			this.props.onCreate({
+				...exercise,
+				id: exercise.title.toLocaleLowerCase().replace(/ /g, '-'),
+			});
+
+			this.setState({
+				exercise: {
+					title: '',
+					description: '',
+					muscles: '',
+				},
+				open: false,
+			});
 		};
 		render () {
-			const { open, form: { title, description, muscles } } = this.state,
+			const { open, exercise: { title, description, muscles } } = this.state,
 				{ classes, muscles: categories } = this.props;
 			//above we renamed muscles to categories coming from Header <createDialog/>
 			return (
@@ -120,7 +132,7 @@ export default withStyles(styles)(
 										onChange={this.handleChange('muscles')}
 										input={<OutlinedInput name="age" id="outlined-age-simple" />}>
 										{categories.map((category) => (
-											<MenuItem className={classes.selectField} value={category}>
+											<MenuItem className={classes.selectField} key={category} value={category}>
 												{category}
 											</MenuItem>
 										))}

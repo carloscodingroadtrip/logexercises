@@ -30,7 +30,7 @@ export default class extends Component {
 		}));
 	};
 
-	handleExerciseCreate = (exercises) => {
+	handleExerciseCreate = (exercise) => {
 		this.setState(({ exercises }) => ({
 			exercises: [ ...exercises, exercise ],
 		}));
