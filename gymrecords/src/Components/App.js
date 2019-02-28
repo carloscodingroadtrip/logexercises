@@ -10,12 +10,22 @@ export default class extends Component {
 	};
 
 	getExercisesByCategory () {
+		const initialCategories = muscles.reduce(
+			(exercises, categories) => ({
+				...exercises,
+				[categories]: [],
+			}),
+			{}
+		);
+
+		console.log(muscles, initialCategories);
+
 		return Object.entries(
 			this.state.exercises.reduce((cat_group, excercise) => {
 				const { muscles } = excercise;
-				cat_group[muscles] = cat_group[muscles] ? [ ...cat_group[muscles], excercise ] : [ excercise ];
+				cat_group[muscles] = [ ...cat_group[muscles], excercise ];
 				return cat_group;
-			}, {})
+			}, initialCategories)
 		);
 	}
 
