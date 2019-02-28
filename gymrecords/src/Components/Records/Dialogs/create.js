@@ -7,7 +7,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import AddIcon from '@material-ui/icons/Add';
-import Save from '@material-ui/icons/Save';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,7 +17,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { getEnabledCategories } from '../../App';
 
 const styles = (theme) => ({
 	formControl: {
@@ -84,8 +82,8 @@ export default withStyles(styles)(
 						<AddIcon />
 					</Button>
 					<Dialog
-						disableBackdropClick="true"
-						disableEscapeKeyDown="true"
+						disableBackdropClick={true}
+						disableEscapeKeyDown={true}
 						fullScreen
 						open={open}
 						onClose={this.handleToggle}>
@@ -100,14 +98,6 @@ export default withStyles(styles)(
 								<Typography variant="h6" color="inherit" style={{ flex: 1, marginLeft: 30 }}>
 									New Excercise
 								</Typography>
-								{/* <Button
-								variant="fab"
-								mini
-								color="secondary"
-								styte={{ flex: 1 }}
-								onClick={this.handleToggle}>
-								<Save />
-							</Button> */}
 							</Toolbar>
 						</AppBar>
 						<DialogTitle id="form-dialog-title">Create a new exercise</DialogTitle>

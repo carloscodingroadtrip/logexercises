@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Typography, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Delete from '@material-ui/icons/DeleteForeverTwoTone';
 const styles = {
 	root: {
 		flexGrow: 1,
@@ -20,13 +21,14 @@ export default ({
 	exercises_in_group,
 	category,
 	onSelect,
+	onDelete,
 	exercise: { id, title = 'Welcome!', description = 'Please select some ideas from the list on the left.' },
 }) => (
 	<Grid container spacing={24}>
 		<Grid item xs={6}>
 			<Paper style={styles.paper}>
 				{exercises_in_group.map(
-					([ group, exercises ]) =>
+					([ group, exercise ]) =>
 						//if category is undefined or empty string or category equals the group we selected
 						//we display the fragment
 						!category || category === group ? (
@@ -35,9 +37,14 @@ export default ({
 									{group}
 								</Typography>
 								<List component="ul">
-									{exercises.map(({ id, title }) => (
+									{exercise.map(({ id, title }) => (
 										<ListItem key={id} button onClick={() => onSelect(id)}>
-											<ListItemText primary={title} />
+											<ListItemText key={id} primary={title} />
+											<ListItemSecondaryAction>
+												<IconButton>
+													<Delete onClick={() => onDelete(id)} />
+												</IconButton>
+											</ListItemSecondaryAction>
 										</ListItem>
 									))}
 								</List>

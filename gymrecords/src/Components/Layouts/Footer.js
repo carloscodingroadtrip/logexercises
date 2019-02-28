@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import AllIcon from '@material-ui/icons/FormatLineSpacing';
 import BullishIcon from '@material-ui/icons/Timeline';
